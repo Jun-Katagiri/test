@@ -1,0 +1,35 @@
+#include <curses.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_COUNT 5
+
+int main(void)
+{
+  int i;
+
+  /* curses�����Ѥ����Ȥ���ɬ���ǽ��ˤ��������� */
+  if(initscr() == NULL){
+    fprintf(stderr, "initscr failure");
+    exit(EXIT_FAILURE);
+  }
+
+  for(i = 0; i < MAX_COUNT; i++){
+    /* ���������ΰ�ư */
+    move(0,0);
+    /* curses�Ǥ�printf */
+    printw("%2d", i);
+    /* ���̤򹹿� */
+    refresh();
+    sleep(1);
+  }
+
+  /* curses�����Ѥ�������ɬ���Ǹ��ˤ��������� */
+  if(endwin() == ERR){
+    /* endwin�����Ԥ��Ƥ��������ϤǤ��뤫�ɤ����ϵ��� */
+    fprintf(stderr, "endwin failure");
+    exit(EXIT_FAILURE);
+  }
+
+  exit(EXIT_SUCCESS);
+}
